@@ -1,0 +1,327 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<title>PTAM – Exemplo</title><style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  :root { --laranja:#F26B1D; --escuro:#14181F; --cinza:#5B6470; --linha:#D9DEE5; --fundo:#F5F7FA; }
+  * { box-sizing: border-box; }
+  body { font-family: "Inter", "DejaVu Sans", sans-serif; color: var(--escuro); font-size: 10.5pt; line-height: 1.5; margin: 0; }
+  h1,h2,h3 { font-family: "Inter Display","Inter",sans-serif; margin: 0; }
+  .campo { color: #A04A12; background: #FFF1E8; padding: 0 3px; border-radius: 2px; font-weight: 500; }
+  .nota { font-size: 8.5pt; color: var(--cinza); }
+
+  /* capa */
+  .capa { height: 257mm; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; }
+  .capa-topo { display:flex; justify-content:space-between; align-items:center; border-bottom: 3px solid var(--laranja); padding-bottom: 10mm; }
+  .logo-box { width: 52mm; height: 22mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; text-align:center; }
+  .capa-tag { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: var(--laranja); font-weight: 700; }
+  .capa-meio h1 { font-size: 30pt; line-height: 1.12; letter-spacing: -.01em; }
+  .capa-meio h1 span { color: var(--laranja); }
+  .capa-meio .sub { font-size: 13pt; color: var(--cinza); margin-top: 6mm; }
+  .capa-dados { background: var(--fundo); border-left: 4px solid var(--laranja); padding: 7mm 8mm; margin-top: 14mm; }
+  .capa-dados table { width:100%; border-collapse: collapse; }
+  .capa-dados td { padding: 1.6mm 0; vertical-align: top; }
+  .capa-dados td:first-child { width: 42mm; color: var(--cinza); font-size: 9.5pt; }
+  .capa-rodape { display:flex; justify-content:space-between; font-size: 9pt; color: var(--cinza); border-top: 1px solid var(--linha); padding-top: 4mm; }
+
+  /* sumário */
+  .sumario { page-break-after: always; }
+  .sumario ol { padding-left: 0; list-style: none; counter-reset: s; margin-top: 8mm; }
+  .sumario li { counter-increment: s; display:flex; padding: 2.6mm 0; border-bottom: 1px dotted var(--linha); }
+  .sumario li::before { content: counter(s, decimal-leading-zero); color: var(--laranja); font-weight: 700; width: 12mm; }
+
+  /* seções */
+  .titulo-pag { font-size: 18pt; margin-bottom: 2mm; }
+  .linha-laranja { width: 18mm; height: 3px; background: var(--laranja); margin-bottom: 6mm; }
+  section { margin-bottom: 7mm; break-inside: avoid-page; }
+  section h2 { font-size: 12.5pt; display:flex; gap: 3mm; align-items: baseline; border-bottom: 1px solid var(--linha); padding-bottom: 1.5mm; margin-bottom: 3mm; }
+  section h2 .n { color: var(--laranja); font-size: 11pt; }
+  section h3 { font-size: 10.5pt; margin: 3mm 0 1.5mm; }
+  p { margin: 0 0 2.4mm; text-align: justify; }
+
+  table.dados { width:100%; border-collapse: collapse; font-size: 9.5pt; margin: 2mm 0 3mm; }
+  table.dados th { background: var(--escuro); color: #fff; text-align: left; font-weight: 600; padding: 2mm 2.4mm; font-size: 8.8pt; }
+  table.dados td { border-bottom: 1px solid var(--linha); padding: 1.9mm 2.4mm; vertical-align: top; }
+  table.dados tr:nth-child(even) td { background: var(--fundo); }
+  table.ficha td:first-child { width: 48mm; color: var(--cinza); }
+  table.num td, table.num th { text-align: right; }
+  table.num td:first-child, table.num th:first-child { text-align: left; }
+
+  .destaque { border: 2px solid var(--laranja); border-radius: 3mm; padding: 6mm 8mm; text-align: center; margin: 4mm 0; break-inside: avoid; }
+  .destaque .rot { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); }
+  .destaque .valor { font-size: 24pt; font-weight: 800; margin: 2mm 0; }
+  .destaque .ext { font-size: 10pt; color: var(--cinza); }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .caixa { background: var(--fundo); padding: 4mm 5mm; border-radius: 2mm; }
+  .caixa b { display:block; font-size: 9pt; color: var(--cinza); font-weight: 500; }
+  .caixa span { font-size: 12pt; font-weight: 700; }
+  ul { margin: 0 0 2.4mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  .fotos { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .foto { height: 52mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; }
+  .assinatura { margin-top: 22mm; text-align:center; }
+  .assinatura .traco { width: 85mm; border-top: 1px solid var(--escuro); margin: 0 auto 2mm; }
+  .aviso-modelo { border: 1px solid #F3C9AE; background: #FFF8F3; padding: 4mm 5mm; border-radius: 2mm; font-size: 8.8pt; color: #6B3A17; margin-top: 8mm; }
+  .quebra { page-break-before: always; }
+
+  .marca { display:flex; flex-direction:column; line-height:1.05; }
+  .marca .m1 { font-family:"Inter Display",sans-serif; font-weight:800; font-size:20pt; letter-spacing:.06em; }
+  .marca .m2 { font-size:9pt; color: var(--laranja); letter-spacing:.08em; text-transform:uppercase; }
+  .capa-valor { margin-top:8mm; display:flex; justify-content:space-between; align-items:center; background: var(--escuro); color:#fff; padding:6mm 8mm; border-radius:2mm; }
+  .capa-valor span { font-size:9pt; letter-spacing:.12em; text-transform:uppercase; color:#C9CED6; }
+  .capa-valor b { font-size:20pt; }
+  .resumo { margin-top: 12mm; }
+  .titulo-res { font-weight:700; font-size:11pt; margin-bottom:3mm; }
+  .grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .grid3 .caixa span { font-size: 11pt; }
+  .esq { text-align:left !important; }
+  .ok { color:#1E7B46; font-weight:600; } .fora { color:#B3261E; font-weight:600; }
+  table.num td, table.num th { white-space: nowrap; }
+  table.num td.esq { white-space: normal; }
+  .grid2 > table { margin: 0; }
+  .fotos { grid-template-columns: 1fr 1fr 1fr; } .foto { height: 44mm; }
+  .aviso-modelo { break-inside: avoid; }
+  .sumario li { padding: 1.7mm 0; }
+  .sumario ol { margin-top: 5mm; }
+  .resumo { margin-top: 7mm; }
+</style></head><body>
+
+<div class="capa">
+  <div class="capa-topo">
+    <div class="marca"><span class="m1">SILVA</span><span class="m2">Negócios Imobiliários</span></div>
+    <div class="capa-tag">Parecer nº 027/2026</div>
+  </div>
+  <div class="capa-meio">
+    <div class="capa-tag">Avaliação mercadológica</div>
+    <h1>Parecer Técnico de<br>Avaliação <span>Mercadológica</span></h1>
+    <div class="sub">PTAM · Método Comparativo Direto de Dados de Mercado · ABNT NBR 14653-2</div>
+    <div class="capa-dados"><table>
+      <tr><td>Imóvel</td><td>Apartamento residencial – 68 m² privativos</td></tr>
+      <tr><td>Endereço</td><td>Rua das Acácias, nº 120, Apto 302, Bairro Jardim Primavera, Cidade Exemplo/SC, CEP 88000-000</td></tr>
+      <tr><td>Matrícula</td><td>Matrícula nº 45.678 – 1º Registro de Imóveis de Cidade Exemplo</td></tr>
+      <tr><td>Solicitante</td><td>Maria Aparecida Souza</td></tr>
+      <tr><td>Finalidade</td><td>Subsidiar a definição do preço de venda</td></tr>
+      <tr><td>Data da vistoria</td><td>10/11/2026</td></tr>
+    </table></div>
+    <div class="capa-valor"><span>Valor de mercado</span><b>R$ 418.000,00</b></div>
+  </div>
+  <div class="capa-rodape">
+    <div><b>Responsável técnico:</b> João Carlos da Silva · Corretor de Imóveis · CRECI 00000-F/SC · CNAI 00000</div>
+    <div>Cidade Exemplo/SC, 15 de novembro de 2026</div>
+  </div>
+</div>
+
+<div class="sumario">
+  <div class="titulo-pag">Sumário</div><div class="linha-laranja"></div>
+  <ol>
+    <li>Identificação do solicitante e do responsável técnico</li><li>Objetivo, finalidade e data de referência</li>
+    <li>Documentação analisada</li><li>Vistoria e caracterização do imóvel</li>
+    <li>Caracterização da região e diagnóstico de mercado</li><li>Metodologia e critérios de homogeneização</li>
+    <li>Pesquisa de mercado</li><li>Tratamento dos dados por fatores</li>
+    <li>Saneamento da amostra e estatística</li><li>Graus de fundamentação e de precisão</li>
+    <li>Cálculo do valor e campo de arbítrio</li><li>Conclusão</li>
+    <li>Pressupostos, ressalvas e limitações</li><li>Encerramento</li><li>Anexos</li>
+  </ol>
+  <div class="resumo">
+    <div class="titulo-res">Resumo da avaliação</div>
+    <div class="grid3">
+      <div class="caixa"><b>Valor de mercado</b><span>R$ 418.000</span></div>
+      <div class="caixa"><b>Valor unitário</b><span>R$ 6.146,15/m²</span></div>
+      <div class="caixa"><b>Amostra utilizada</b><span>8 imóveis</span></div>
+      <div class="caixa"><b>Faixa de negociação (IC 80%)</b><span>R$ 407.291 a 428.586</span></div>
+      <div class="caixa"><b>Fundamentação</b><span>Grau II</span></div>
+      <div class="caixa"><b>Precisão</b><span>Grau III</span></div>
+    </div>
+  </div>
+</div>
+
+<section><h2><span class="n">01</span> Identificação do solicitante e do responsável técnico</h2>
+<table class="dados ficha">
+<tr><td>Solicitante</td><td>Maria Aparecida Souza · CPF 000.000.000-00</td></tr>
+<tr><td>Condição</td><td>Proprietária do imóvel</td></tr>
+<tr><td>Responsável técnico</td><td>João Carlos da Silva – Corretor de Imóveis</td></tr>
+<tr><td>Registros</td><td>CRECI 00000-F/SC · CNAI 00000</td></tr>
+<tr><td>Empresa</td><td>Silva Negócios Imobiliários · CRECI J-0000/SC</td></tr>
+</table></section>
+
+<section><h2><span class="n">02</span> Objetivo, finalidade e data de referência</h2>
+<p>O presente parecer tem por <b>objetivo</b> determinar o <b>valor de mercado para venda</b> do imóvel descrito no item 04, entendido como a quantia mais provável pela qual se negociaria voluntária e conscientemente o bem, numa data de referência, dentro das condições do mercado vigente.</p>
+<p><b>Finalidade:</b> subsidiar a proprietária na definição do preço de oferta do imóvel. <b>Data de referência:</b> 10/11/2026.</p>
+</section>
+
+<section><h2><span class="n">03</span> Documentação analisada</h2>
+<table class="dados ficha">
+<tr><td>Matrícula</td><td>Matrícula nº 45.678 – 1º Registro de Imóveis de Cidade Exemplo – certidão de inteiro teor emitida em 03/11/2026</td></tr>
+<tr><td>IPTU</td><td>Inscrição imobiliária nº 01.02.033.0456.001 – exercício 2026</td></tr>
+<tr><td>Convenção / condomínio</td><td>Declaração de quitação condominial fornecida pela síndica</td></tr>
+<tr><td>Planta</td><td>Planta baixa da unidade, conforme projeto aprovado</td></tr>
+</table>
+<p class="nota">Não constam ônus reais na certidão apresentada. A análise documental limita-se aos documentos acima.</p>
+</section>
+
+<section class="quebra"><h2><span class="n">04</span> Vistoria e caracterização do imóvel</h2>
+<p>Vistoria realizada em 10/11/2026, às 14h, acompanhada pela proprietária.</p>
+<div class="grid2">
+<table class="dados ficha">
+<tr><td>Tipo</td><td>Apartamento residencial</td></tr>
+<tr><td>Área privativa</td><td>68,00 m²</td></tr>
+<tr><td>Área total</td><td>95,40 m² (incluída fração de vaga e áreas comuns)</td></tr>
+<tr><td>Dormitórios</td><td>2 (sendo 1 suíte)</td></tr>
+<tr><td>Vagas de garagem</td><td>1 coberta, privativa</td></tr>
+<tr><td>Pavimento</td><td>3º andar, frente, posição solar norte</td></tr>
+</table>
+<table class="dados ficha">
+<tr><td>Idade aparente</td><td>9 anos</td></tr>
+<tr><td>Padrão construtivo</td><td>Normal</td></tr>
+<tr><td>Conservação</td><td>Bom – necessita apenas reparos simples</td></tr>
+<tr><td>Elevador</td><td>Sim (1)</td></tr>
+<tr><td>Lazer</td><td>Salão de festas, playground, churrasqueira</td></tr>
+<tr><td>Condomínio</td><td>R$ 520,00/mês</td></tr>
+</table>
+</div>
+<h3>Ambientes vistoriados</h3>
+<table class="dados">
+<tr><th>Ambiente</th><th>Piso</th><th>Parede</th><th>Teto</th><th>Estado</th></tr>
+<tr><td>Sala estar/jantar</td><td>Porcelanato</td><td>Pintura acrílica</td><td>Gesso rebaixado</td><td>Bom</td></tr>
+<tr><td>Cozinha</td><td>Porcelanato</td><td>Cerâmica até o teto</td><td>Gesso</td><td>Bom</td></tr>
+<tr><td>Área de serviço</td><td>Cerâmica</td><td>Cerâmica</td><td>Pintura</td><td>Bom</td></tr>
+<tr><td>Suíte</td><td>Laminado</td><td>Pintura acrílica</td><td>Gesso</td><td>Bom</td></tr>
+<tr><td>Dormitório 2</td><td>Laminado</td><td>Pintura acrílica</td><td>Gesso</td><td>Regular – pintura desgastada</td></tr>
+<tr><td>Banheiros (2)</td><td>Porcelanato</td><td>Cerâmica</td><td>Gesso</td><td>Bom</td></tr>
+<tr><td>Sacada com churrasqueira</td><td>Porcelanato</td><td>Textura</td><td>Pintura</td><td>Bom</td></tr>
+</table>
+<p>Imóvel em boas condições de uso e habitabilidade. Esquadrias em alumínio com vidro liso, instalações aparentes sem sinais de vazamentos ou infiltrações na inspeção visual. Recomenda-se renovação da pintura do dormitório 2, sem impacto relevante no valor.</p>
+</section>
+
+<section><h2><span class="n">05</span> Caracterização da região e diagnóstico de mercado</h2>
+<p>O Bairro Jardim Primavera é predominantemente residencial, com edifícios multifamiliares de padrão normal e médio. Conta com infraestrutura completa (água, esgoto, energia, iluminação pública, pavimentação e coleta de lixo), comércio de bairro, supermercados, escolas públicas e particulares, unidade de saúde e linhas de ônibus a menos de 300 m. Está a aproximadamente 4 km do centro da cidade.</p>
+<table class="dados ficha">
+<tr><td>Liquidez</td><td>Média a alta – tempo médio de venda estimado entre 3 e 6 meses</td></tr>
+<tr><td>Desempenho do mercado</td><td>Normal, com procura constante por unidades de 2 dormitórios</td></tr>
+<tr><td>Número de ofertas</td><td>Médio – foram identificadas 23 ofertas semelhantes na região</td></tr>
+<tr><td>Público-alvo</td><td>Casais e famílias pequenas, primeiro imóvel ou troca</td></tr>
+<tr><td>Fatores de valorização</td><td>Posição solar norte, sacada com churrasqueira, proximidade de comércio</td></tr>
+</table>
+</section>
+
+<section><h2><span class="n">06</span> Metodologia e critérios de homogeneização</h2>
+<p>Foi empregado o <b>Método Comparativo Direto de Dados de Mercado</b>, previsto na ABNT NBR 14653-1 e detalhado na ABNT NBR 14653-2, que identifica o valor de mercado do bem por meio do tratamento técnico dos atributos de elementos comparáveis, constituintes de uma amostra representativa do mercado.</p>
+<p>Os dados foram homogeneizados por <b>tratamento por fatores</b>, adotando-se os seguintes critérios:</p>
+<table class="dados">
+<tr><th>Fator</th><th>Critério adotado</th></tr>
+<tr><td>Oferta</td><td class="esq">0,90 – desconto de 10% sobre o preço anunciado, compatível com a margem de negociação praticada na região.</td></tr>
+<tr><td>Localização</td><td class="esq">Comparação direta entre o logradouro do comparável e o do avaliando (acesso, comércio, vizinhança). Valores entre 0,95 e 1,05.</td></tr>
+<tr><td>Área</td><td class="esq">F = (Área do comparável ÷ Área do avaliando)<sup>1/8</sup>, aplicável a diferenças de área inferiores a 30%.</td></tr>
+<tr><td>Padrão construtivo</td><td class="esq">Ajuste de ±5% para unidades de padrão superior ou inferior ao avaliando.</td></tr>
+<tr><td>Conservação</td><td class="esq">Ajuste de ±5% conforme estado de conservação observado em comparação ao avaliando.</td></tr>
+</table>
+<p class="nota">Parecer elaborado por corretor de imóveis nos termos da Lei nº 6.530/1978 e da Resolução COFECI nº 1.066/2007.</p>
+</section>
+
+<section><h2><span class="n">07</span> Pesquisa de mercado</h2>
+<p>Foram coletados <b>8 elementos comparáveis</b> no mesmo bairro e em bairros vizinhos de mesma característica, entre setembro e novembro de 2026, todos apartamentos residenciais em edifícios com elevador.</p>
+<table class="dados num">
+<tr><th>Nº</th><th class="esq">Endereço / fonte</th><th>Área (m²)</th><th>Dorm/Vagas</th><th>Idade</th><th>Valor ofertado (R$)</th><th>R$/m²</th></tr>
+<tr><td>1</td><td class='esq'>Rua das Acácias, 210 – Apto 401<br><span class='nota'>Imobiliária Horizonte</span></td><td>72,00</td><td>2/1</td><td>8</td><td>505.000</td><td>7.013,89</td></tr><tr><td>2</td><td class='esq'>Rua dos Ipês, 88 – Apto 203<br><span class='nota'>Portal de anúncios</span></td><td>64,50</td><td>2/1</td><td>10</td><td>402.000</td><td>6.232,56</td></tr><tr><td>3</td><td class='esq'>Av. Central, 1.540 – Apto 702<br><span class='nota'>Corretor autônomo</span></td><td>75,30</td><td>2/1</td><td>5</td><td>560.000</td><td>7.436,92</td></tr><tr><td>4</td><td class='esq'>Rua das Palmeiras, 45 – Apto 104<br><span class='nota'>Imobiliária Lar Certo</span></td><td>61,00</td><td>2/1</td><td>14</td><td>410.000</td><td>6.721,31</td></tr><tr><td>5</td><td class='esq'>Rua Ver. Antônio Lima, 300 – Apto 502<br><span class='nota'>Portal de anúncios</span></td><td>70,20</td><td>2/1</td><td>9</td><td>455.000</td><td>6.481,48</td></tr><tr><td>6</td><td class='esq'>Rua dos Ipês, 150 – Apto 301<br><span class='nota'>Imobiliária Horizonte</span></td><td>66,80</td><td>2/1</td><td>12</td><td>470.000</td><td>7.035,93</td></tr><tr><td>7</td><td class='esq'>Rua das Acácias, 77 – Apto 205<br><span class='nota'>Imobiliária Lar Certo</span></td><td>69,00</td><td>2/1</td><td>9</td><td>438.000</td><td>6.347,83</td></tr><tr><td>8</td><td class='esq'>Rua Bela Vista, 510 – Apto 603<br><span class='nota'>Corretor autônomo</span></td><td>80,00</td><td>3/1</td><td>6</td><td>585.000</td><td>7.312,50</td></tr>
+</table>
+</section>
+
+<section><h2><span class="n">08</span> Tratamento dos dados por fatores</h2>
+<p>Valor unitário homogeneizado = R$/m² × F.oferta × F.localização × F.área × F.padrão × F.conservação.</p>
+<table class="dados num">
+<tr><th>Nº</th><th>R$/m²</th><th>F. oferta</th><th>F. local.</th><th>F. área</th><th>F. padrão</th><th>F. conserv.</th><th>Produto</th><th>R$/m² homog.</th></tr>
+<tr><td>1</td><td>7.013,89</td><td>0,90</td><td>1,00</td><td>1,007</td><td>1,00</td><td>1,00</td><td>0,906</td><td><b>6.357,76</b></td></tr><tr><td>2</td><td>6.232,56</td><td>0,90</td><td>1,05</td><td>0,993</td><td>1,00</td><td>1,00</td><td>0,939</td><td><b>5.850,99</b></td></tr><tr><td>3</td><td>7.436,92</td><td>0,90</td><td>0,95</td><td>1,013</td><td>0,95</td><td>1,00</td><td>0,823</td><td><b>6.118,13</b></td></tr><tr><td>4</td><td>6.721,31</td><td>0,90</td><td>1,00</td><td>0,987</td><td>1,05</td><td>1,05</td><td>0,979</td><td><b>6.579,27</b></td></tr><tr><td>5</td><td>6.481,48</td><td>0,90</td><td>1,00</td><td>1,004</td><td>1,00</td><td>1,00</td><td>0,904</td><td><b>5.856,60</b></td></tr><tr><td>6</td><td>7.035,93</td><td>0,90</td><td>1,05</td><td>0,998</td><td>1,00</td><td>0,95</td><td>0,896</td><td><b>6.302,46</b></td></tr><tr><td>7</td><td>6.347,83</td><td>0,90</td><td>1,00</td><td>1,002</td><td>1,00</td><td>1,00</td><td>0,902</td><td><b>5.723,48</b></td></tr><tr><td>8</td><td>7.312,50</td><td>0,90</td><td>0,95</td><td>1,021</td><td>1,00</td><td>1,00</td><td>0,873</td><td><b>6.380,50</b></td></tr>
+</table>
+</section>
+
+<section><h2><span class="n">09</span> Saneamento da amostra e estatística</h2>
+<p>Média dos valores homogeneizados: <b>R$ 6.146,15/m²</b>. Critério de saneamento: são mantidos os elementos cujo valor homogeneizado está no intervalo de ±30% em torno da média.</p>
+<div class="grid2">
+<table class="dados num">
+<tr><th>Nº</th><th>R$/m² homog.</th><th>Desvio da média</th><th>Situação</th></tr>
+<tr><td>1</td><td>6.357,76</td><td>+3,4%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>2</td><td>5.850,99</td><td>-4,8%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>3</td><td>6.118,13</td><td>-0,5%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>4</td><td>6.579,27</td><td>+7,0%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>5</td><td>5.856,60</td><td>-4,7%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>6</td><td>6.302,46</td><td>+2,5%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>7</td><td>5.723,48</td><td>-6,9%</td><td><span class='ok'>Mantido</span></td></tr><tr><td>8</td><td>6.380,50</td><td>+3,8%</td><td><span class='ok'>Mantido</span></td></tr>
+</table>
+<table class="dados ficha">
+<tr><td>Elementos utilizados (n)</td><td>8</td></tr>
+<tr><td>Média saneada</td><td>R$ 6.146,15/m²</td></tr>
+<tr><td>Desvio padrão</td><td>R$ 307,55/m²</td></tr>
+<tr><td>Coeficiente de variação</td><td>5,0%</td></tr>
+<tr><td>t de Student (80%, 7 g.l.)</td><td>1,440</td></tr>
+<tr><td>Limite inferior IC 80%</td><td>R$ 5.989,57/m²</td></tr>
+<tr><td>Limite superior IC 80%</td><td>R$ 6.302,73/m²</td></tr>
+<tr><td>Amplitude do IC 80%</td><td>5,1%</td></tr>
+</table>
+</div>
+<p>Todos os elementos ficaram dentro do intervalo de saneamento. O baixo coeficiente de variação indica amostra homogênea após o tratamento.</p>
+</section>
+
+<section><h2><span class="n">10</span> Graus de fundamentação e de precisão</h2>
+<h3>Fundamentação – tratamento por fatores (ABNT NBR 14653-2)</h3>
+<table class="dados">
+<tr><th>Item</th><th class="esq">Descrição</th><th class="esq">Situação neste parecer</th><th>Grau</th><th>Pontos</th></tr>
+<tr><td>1</td><td class='esq'>Caracterização do imóvel avaliando</td><td class='esq'>Completa quanto aos fatores utilizados no tratamento</td><td><b>III</b></td><td>3</td></tr><tr><td>2</td><td class='esq'>Quantidade mínima de dados de mercado efetivamente utilizados</td><td class='esq'>8 dados (Grau III exige 12; Grau II, 5)</td><td><b>II</b></td><td>2</td></tr><tr><td>3</td><td class='esq'>Identificação dos dados de mercado</td><td class='esq'>Informações de todas as características analisadas, com fotos e vistoria externa</td><td><b>III</b></td><td>3</td></tr><tr><td>4</td><td class='esq'>Intervalo admissível de ajuste para o conjunto de fatores</td><td class='esq'>Produtos entre 0,823 e 0,979</td><td><b>III</b></td><td>3</td></tr>
+<tr><td></td><td class="esq" colspan="3"><b>Total de pontos</b></td><td><b>11</b></td></tr>
+</table>
+<p>Enquadramento: <b>Grau II de fundamentação</b>. Para atingir o Grau III seria necessário utilizar ao menos 12 dados de mercado.</p>
+<h3>Precisão</h3>
+<p>Amplitude do intervalo de confiança de 80% em torno do valor central: <b>5,1%</b>. Pela NBR 14653-2 (Grau III ≤ 30%; Grau II ≤ 40%; Grau I ≤ 50%), enquadramento em <b>Grau III de precisão</b>.</p>
+</section>
+
+<section><h2><span class="n">11</span> Cálculo do valor e campo de arbítrio</h2>
+<div class="grid2">
+<div class="caixa"><b>Valor unitário adotado (média saneada)</b><span>R$ 6.146,15/m²</span></div>
+<div class="caixa"><b>Área privativa do avaliando</b><span>68,00 m²</span></div>
+</div>
+<p style="margin-top:3mm">Valor calculado = R$ 6.146,15/m² × 68,00 m² = <b>R$ 417.938,11</b>.</p>
+<table class="dados num">
+<tr><th>Referência</th><th>Valor (R$)</th></tr>
+<tr><td>Campo de arbítrio – limite inferior (−15%)</td><td>355.247,39</td></tr>
+<tr><td>Faixa de negociação – IC 80% inferior</td><td>407.290,64</td></tr>
+<tr><td><b>Valor calculado</b></td><td><b>417.938,11</b></td></tr>
+<tr><td>Faixa de negociação – IC 80% superior</td><td>428.585,58</td></tr>
+<tr><td>Campo de arbítrio – limite superior (+15%)</td><td>480.628,82</td></tr>
+</table>
+<p>Não foram identificadas características do imóvel não contempladas no tratamento que justificassem afastamento do valor calculado; adota-se o valor central, arredondado conforme a tolerância de até 1% admitida pela NBR 14653-1.</p>
+</section>
+
+<section><h2><span class="n">12</span> Conclusão</h2>
+<div class="destaque">
+<div class="rot">Valor de mercado para venda</div>
+<div class="valor">R$ 418.000,00</div>
+<div class="ext">(quatrocentos e dezoito mil reais)</div>
+</div>
+<div class="grid3">
+<div class="caixa"><b>Data de referência</b><span>10/11/2026</span></div>
+<div class="caixa"><b>Fundamentação</b><span>Grau II</span></div>
+<div class="caixa"><b>Precisão</b><span>Grau III</span></div>
+</div>
+<p style="margin-top:3mm"><b>Recomendação ao cliente:</b> considerando a margem de negociação da região, sugere-se anunciar o imóvel entre R$ 440.000 e R$ 464.000, com expectativa de fechamento próximo ao valor de mercado apurado.</p>
+</section>
+
+<section><h2><span class="n">13</span> Pressupostos, ressalvas e limitações</h2>
+<ul>
+<li>A documentação foi fornecida pela solicitante e considerada verdadeira; não foram realizadas pesquisas cartoriais ou judiciais além das indicadas no item 03.</li>
+<li>O imóvel foi considerado livre de ônus, dívidas, ações judiciais e irregularidades, conforme certidão de matrícula apresentada.</li>
+<li>As áreas consideradas são as constantes na matrícula, conferidas com a planta da unidade.</li>
+<li>Não foram realizadas análises estruturais, de instalações ou ambientais; o estado de conservação refere-se à inspeção visual na data da vistoria.</li>
+<li>Os dados de mercado são ofertas obtidas junto a imobiliárias, portais e corretores, e foram tratadas com fator de oferta.</li>
+<li>O valor reflete as condições de mercado na data de referência e pode variar com o tempo.</li>
+<li>Este parecer não substitui laudo de avaliação elaborado por engenheiro ou arquiteto quando exigido por lei, órgão público ou instituição financeira.</li>
+</ul>
+</section>
+
+<section><h2><span class="n">14</span> Encerramento</h2>
+<p>Nada mais havendo a esclarecer, encerra-se o presente Parecer Técnico de Avaliação Mercadológica, composto por <span class="totalpag">11</span> páginas, incluindo anexos, todas rubricadas, sendo esta datada e assinada.</p>
+<p>Cidade Exemplo/SC, 15 de novembro de 2026.</p>
+<div class="assinatura"><div class="traco"></div>
+<b>João Carlos da Silva</b><br>Corretor de Imóveis · CRECI 00000-F/SC · CNAI 00000</div>
+</section>
+
+<section class="quebra"><h2><span class="n">15</span> Anexos</h2>
+<h3>A. Relatório fotográfico</h3>
+<div class="fotos"><div class="foto">Fachada do edifício</div><div class="foto">Sala estar/jantar</div>
+<div class="foto">Cozinha</div><div class="foto">Suíte</div><div class="foto">Banheiro social</div><div class="foto">Sacada com churrasqueira</div></div>
+<h3 style="margin-top:5mm">B. Mapa de localização do imóvel e dos comparáveis</h3>
+<div class="foto" style="height:62mm">Mapa com o avaliando e os 8 comparáveis</div>
+<h3 style="margin-top:5mm">C. Documentos anexos</h3>
+<ul><li>Certidão de inteiro teor da matrícula nº 45.678</li><li>Carnê de IPTU 2026</li><li>Fichas e anúncios dos 8 elementos comparáveis</li><li>Declaração de quitação condominial</li></ul>
+</section>
+</body></html>

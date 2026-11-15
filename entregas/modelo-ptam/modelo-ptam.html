@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Modelo PTAM</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  :root { --laranja:#F26B1D; --escuro:#14181F; --cinza:#5B6470; --linha:#D9DEE5; --fundo:#F5F7FA; }
+  * { box-sizing: border-box; }
+  body { font-family: "Inter", "DejaVu Sans", sans-serif; color: var(--escuro); font-size: 10.5pt; line-height: 1.5; margin: 0; }
+  h1,h2,h3 { font-family: "Inter Display","Inter",sans-serif; margin: 0; }
+  .campo { color: #A04A12; background: #FFF1E8; padding: 0 3px; border-radius: 2px; font-weight: 500; }
+  .nota { font-size: 8.5pt; color: var(--cinza); }
+
+  /* capa */
+  .capa { height: 257mm; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; }
+  .capa-topo { display:flex; justify-content:space-between; align-items:center; border-bottom: 3px solid var(--laranja); padding-bottom: 10mm; }
+  .logo-box { width: 52mm; height: 22mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; text-align:center; }
+  .capa-tag { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: var(--laranja); font-weight: 700; }
+  .capa-meio h1 { font-size: 30pt; line-height: 1.12; letter-spacing: -.01em; }
+  .capa-meio h1 span { color: var(--laranja); }
+  .capa-meio .sub { font-size: 13pt; color: var(--cinza); margin-top: 6mm; }
+  .capa-dados { background: var(--fundo); border-left: 4px solid var(--laranja); padding: 7mm 8mm; margin-top: 14mm; }
+  .capa-dados table { width:100%; border-collapse: collapse; }
+  .capa-dados td { padding: 1.6mm 0; vertical-align: top; }
+  .capa-dados td:first-child { width: 42mm; color: var(--cinza); font-size: 9.5pt; }
+  .capa-rodape { display:flex; justify-content:space-between; font-size: 9pt; color: var(--cinza); border-top: 1px solid var(--linha); padding-top: 4mm; }
+
+  /* sumário */
+  .sumario { page-break-after: always; }
+  .sumario ol { padding-left: 0; list-style: none; counter-reset: s; margin-top: 8mm; }
+  .sumario li { counter-increment: s; display:flex; padding: 2.6mm 0; border-bottom: 1px dotted var(--linha); }
+  .sumario li::before { content: counter(s, decimal-leading-zero); color: var(--laranja); font-weight: 700; width: 12mm; }
+
+  /* seções */
+  .titulo-pag { font-size: 18pt; margin-bottom: 2mm; }
+  .linha-laranja { width: 18mm; height: 3px; background: var(--laranja); margin-bottom: 6mm; }
+  section { margin-bottom: 7mm; break-inside: avoid-page; }
+  section h2 { font-size: 12.5pt; display:flex; gap: 3mm; align-items: baseline; border-bottom: 1px solid var(--linha); padding-bottom: 1.5mm; margin-bottom: 3mm; }
+  section h2 .n { color: var(--laranja); font-size: 11pt; }
+  section h3 { font-size: 10.5pt; margin: 3mm 0 1.5mm; }
+  p { margin: 0 0 2.4mm; text-align: justify; }
+
+  table.dados { width:100%; border-collapse: collapse; font-size: 9.5pt; margin: 2mm 0 3mm; }
+  table.dados th { background: var(--escuro); color: #fff; text-align: left; font-weight: 600; padding: 2mm 2.4mm; font-size: 8.8pt; }
+  table.dados td { border-bottom: 1px solid var(--linha); padding: 1.9mm 2.4mm; vertical-align: top; }
+  table.dados tr:nth-child(even) td { background: var(--fundo); }
+  table.ficha td:first-child { width: 48mm; color: var(--cinza); }
+  table.num td, table.num th { text-align: right; }
+  table.num td:first-child, table.num th:first-child { text-align: left; }
+
+  .destaque { border: 2px solid var(--laranja); border-radius: 3mm; padding: 6mm 8mm; text-align: center; margin: 4mm 0; break-inside: avoid; }
+  .destaque .rot { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); }
+  .destaque .valor { font-size: 24pt; font-weight: 800; margin: 2mm 0; }
+  .destaque .ext { font-size: 10pt; color: var(--cinza); }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .caixa { background: var(--fundo); padding: 4mm 5mm; border-radius: 2mm; }
+  .caixa b { display:block; font-size: 9pt; color: var(--cinza); font-weight: 500; }
+  .caixa span { font-size: 12pt; font-weight: 700; }
+  ul { margin: 0 0 2.4mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  .fotos { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .foto { height: 52mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; }
+  .assinatura { margin-top: 22mm; text-align:center; }
+  .assinatura .traco { width: 85mm; border-top: 1px solid var(--escuro); margin: 0 auto 2mm; }
+  .aviso-modelo { border: 1px solid #F3C9AE; background: #FFF8F3; padding: 4mm 5mm; border-radius: 2mm; font-size: 8.8pt; color: #6B3A17; margin-top: 8mm; }
+  .quebra { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="capa-topo">
+    <div class="logo-box">SUA LOGOMARCA<br>(imobiliária / corretor)</div>
+    <div class="capa-tag">Parecer nº <span class="campo">000/2026</span></div>
+  </div>
+  <div class="capa-meio">
+    <div class="capa-tag">Avaliação mercadológica</div>
+    <h1>Parecer Técnico de<br>Avaliação <span>Mercadológica</span></h1>
+    <div class="sub">PTAM · Método Comparativo Direto de Dados de Mercado</div>
+    <div class="capa-dados">
+      <table>
+        <tr><td>Imóvel</td><td><span class="campo">Apartamento nº 000, Edifício ____</span></td></tr>
+        <tr><td>Endereço</td><td><span class="campo">Rua ____, nº ___, Bairro ____, Cidade/UF</span></td></tr>
+        <tr><td>Matrícula</td><td><span class="campo">nº ______ – __º Registro de Imóveis de ______</span></td></tr>
+        <tr><td>Solicitante</td><td><span class="campo">Nome do cliente</span></td></tr>
+        <tr><td>Finalidade</td><td><span class="campo">Compra e venda / partilha / garantia / outro</span></td></tr>
+        <tr><td>Data da vistoria</td><td><span class="campo">__/__/2026</span></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="capa-rodape">
+    <div><b>Responsável técnico:</b> <span class="campo">Nome do corretor</span> · CRECI <span class="campo">00000-F</span> · CNAI <span class="campo">00000</span></div>
+    <div><span class="campo">Cidade</span>, <span class="campo">__ de ______ de 2026</span></div>
+  </div>
+</div>
+
+<!-- SUMÁRIO -->
+<div class="sumario">
+  <div class="titulo-pag">Sumário</div>
+  <div class="linha-laranja"></div>
+  <ol>
+    <li>Identificação do solicitante e do responsável técnico</li>
+    <li>Objetivo e finalidade</li>
+    <li>Identificação e caracterização do imóvel</li>
+    <li>Caracterização da região e diagnóstico de mercado</li>
+    <li>Metodologia</li>
+    <li>Pesquisa de mercado (dados comparáveis)</li>
+    <li>Tratamento dos dados por fatores</li>
+    <li>Cálculo do valor e campo de arbítrio</li>
+    <li>Conclusão: valor de mercado</li>
+    <li>Pressupostos, ressalvas e limitações</li>
+    <li>Encerramento</li>
+    <li>Anexos: fotos, localização e documentos</li>
+  </ol>
+</div>
+
+<!-- CONTEÚDO -->
+<section>
+  <h2><span class="n">01</span> Identificação do solicitante e do responsável técnico</h2>
+  <table class="dados ficha">
+    <tr><td>Solicitante</td><td><span class="campo">Nome completo</span> · CPF/CNPJ <span class="campo">000.000.000-00</span></td></tr>
+    <tr><td>Contato</td><td><span class="campo">telefone / e-mail</span></td></tr>
+    <tr><td>Responsável técnico</td><td><span class="campo">Nome do corretor</span></td></tr>
+    <tr><td>Registro</td><td>CRECI <span class="campo">00000-F</span> · CNAI <span class="campo">00000</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">02</span> Objetivo e finalidade</h2>
+  <p>O presente parecer tem por <b>objetivo</b> a determinação do <b>valor de mercado</b> para venda do imóvel descrito no item 03, na data de referência <span class="campo">__/__/2026</span>.</p>
+  <p><b>Finalidade:</b> <span class="campo">subsidiar negociação de compra e venda / partilha de bens / inventário / garantia / outro</span>.</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span> Identificação e caracterização do imóvel</h2>
+  <table class="dados ficha">
+    <tr><td>Tipo</td><td><span class="campo">Apartamento / casa / terreno / sala comercial</span></td></tr>
+    <tr><td>Endereço completo</td><td><span class="campo">Rua, nº, complemento, bairro, cidade/UF, CEP</span></td></tr>
+    <tr><td>Matrícula / inscrição</td><td><span class="campo">Matrícula nº ____ · Inscrição imobiliária nº ____</span></td></tr>
+    <tr><td>Área privativa</td><td><span class="campo">00,00 m²</span></td></tr>
+    <tr><td>Área total / terreno</td><td><span class="campo">00,00 m²</span></td></tr>
+    <tr><td>Dormitórios / suítes</td><td><span class="campo">0 / 0</span></td></tr>
+    <tr><td>Vagas de garagem</td><td><span class="campo">0</span></td></tr>
+    <tr><td>Idade aparente</td><td><span class="campo">00 anos</span></td></tr>
+    <tr><td>Padrão construtivo</td><td><span class="campo">baixo / normal / alto</span></td></tr>
+    <tr><td>Estado de conservação</td><td><span class="campo">novo / bom / regular / necessita reparos</span></td></tr>
+  </table>
+  <p><b>Descrição:</b> <span class="campo">Descreva distribuição interna, acabamentos, posição solar, andar, vista, áreas comuns do condomínio e demais características relevantes observadas na vistoria.</span></p>
+</section>
+
+<section>
+  <h2><span class="n">04</span> Caracterização da região e diagnóstico de mercado</h2>
+  <p><b>Região:</b> <span class="campo">Infraestrutura urbana (água, esgoto, energia, pavimentação), comércio e serviços próximos, transporte, escolas, uso predominante e polos de valorização.</span></p>
+  <table class="dados ficha">
+    <tr><td>Liquidez</td><td><span class="campo">alta / média / baixa</span></td></tr>
+    <tr><td>Desempenho do mercado</td><td><span class="campo">aquecido / normal / recessivo</span></td></tr>
+    <tr><td>Número de ofertas</td><td><span class="campo">alto / médio / baixo</span></td></tr>
+    <tr><td>Público-alvo provável</td><td><span class="campo">descrever</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">05</span> Metodologia</h2>
+  <p>Foi empregado o <b>Método Comparativo Direto de Dados de Mercado</b>, que identifica o valor do imóvel por meio do tratamento técnico dos atributos de elementos comparáveis, constituintes de uma amostra representativa do mercado, conforme a <b>ABNT NBR 14653-1</b> e a <b>ABNT NBR 14653-2</b>.</p>
+  <p>Os dados foram homogeneizados por <b>tratamento por fatores</b>, aplicando-se fatores de oferta, localização, área, padrão construtivo e conservação, conforme item 07.</p>
+  <p class="nota">Parecer elaborado por corretor de imóveis nos termos da Lei nº 6.530/1978 e da Resolução COFECI nº 1.066/2007.</p>
+</section>
+
+<section class="quebra">
+  <h2><span class="n">06</span> Pesquisa de mercado (dados comparáveis)</h2>
+  <p>Foram coletados <span class="campo">00</span> elementos comparáveis na mesma região geoeconômica, entre <span class="campo">mês/ano</span> e <span class="campo">mês/ano</span>.</p>
+  <table class="dados num">
+    <tr><th>Nº</th><th>Endereço / fonte</th><th>Área (m²)</th><th>Valor ofertado (R$)</th><th>R$/m²</th></tr>
+    <tr><td>1</td><td style="text-align:left"><span class="campo">Rua ____ · imobiliária ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+    <tr><td>2</td><td style="text-align:left"><span class="campo">Rua ____ · portal ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+    <tr><td>3</td><td style="text-align:left"><span class="campo">Rua ____ · ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+    <tr><td>4</td><td style="text-align:left"><span class="campo">Rua ____ · ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+    <tr><td>5</td><td style="text-align:left"><span class="campo">Rua ____ · ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+    <tr><td>6</td><td style="text-align:left"><span class="campo">Rua ____ · ____</span></td><td>00,00</td><td>000.000,00</td><td>0.000,00</td></tr>
+  </table>
+  <p class="nota">Fichas completas de cada comparável (fonte, contato, data da coleta e fotos) constam nos anexos.</p>
+</section>
+
+<section>
+  <h2><span class="n">07</span> Tratamento dos dados por fatores</h2>
+  <table class="dados num">
+    <tr><th>Nº</th><th>R$/m²</th><th>F. oferta</th><th>F. localização</th><th>F. área</th><th>F. padrão</th><th>F. conservação</th><th>R$/m² homog.</th></tr>
+    <tr><td>1</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+    <tr><td>2</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+    <tr><td>3</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+    <tr><td>4</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+    <tr><td>5</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+    <tr><td>6</td><td>0.000,00</td><td>0,90</td><td>1,00</td><td>1,00</td><td>1,00</td><td>1,00</td><td>0.000,00</td></tr>
+  </table>
+  <h3>Saneamento da amostra</h3>
+  <p>Média homogeneizada: R$ <span class="campo">0.000,00</span>/m². Foram considerados os elementos dentro do intervalo de <b>±30% em torno da média</b>; <span class="campo">nenhum elemento foi descartado / os elementos nº __ foram descartados</span>.</p>
+  <p class="nota">Valores de fatores acima são ilustrativos. Justifique cada fator aplicado e confira os limites de ajuste e a quantidade mínima de dados exigidos pela NBR 14653-2 para o grau de fundamentação pretendido.</p>
+</section>
+
+<section>
+  <h2><span class="n">08</span> Cálculo do valor e campo de arbítrio</h2>
+  <div class="grid2">
+    <div class="caixa"><b>Valor unitário adotado</b><span>R$ <span class="campo">0.000,00</span>/m²</span></div>
+    <div class="caixa"><b>Área do imóvel avaliando</b><span><span class="campo">00,00</span> m²</span></div>
+    <div class="caixa"><b>Limite inferior (−15%)</b><span>R$ <span class="campo">000.000,00</span></span></div>
+    <div class="caixa"><b>Limite superior (+15%)</b><span>R$ <span class="campo">000.000,00</span></span></div>
+  </div>
+  <p style="margin-top:3mm">Valor calculado = valor unitário adotado × área = R$ <span class="campo">000.000,00</span>. O campo de arbítrio corresponde ao intervalo de ±15% em torno do valor calculado, dentro do qual o avaliador pode fundamentar o valor final considerando características não contempladas no tratamento.</p>
+</section>
+
+<section>
+  <h2><span class="n">09</span> Conclusão: valor de mercado</h2>
+  <div class="destaque">
+    <div class="rot">Valor de mercado para venda</div>
+    <div class="valor">R$ <span class="campo">000.000,00</span></div>
+    <div class="ext">(<span class="campo">valor por extenso</span>)</div>
+  </div>
+  <p>Data de referência: <span class="campo">__/__/2026</span>. Valor arredondado conforme tolerância de até 1% admitida pela NBR 14653-1.</p>
+</section>
+
+<section>
+  <h2><span class="n">10</span> Pressupostos, ressalvas e limitações</h2>
+  <ul>
+    <li>A documentação foi fornecida pelo solicitante e considerada verdadeira; não foram realizadas pesquisas cartoriais ou judiciais além das indicadas.</li>
+    <li>O imóvel foi considerado livre de ônus, dívidas, ações judiciais e irregularidades, salvo menção expressa.</li>
+    <li>As áreas consideradas são as constantes na <span class="campo">matrícula / IPTU / medição na vistoria</span>.</li>
+    <li>Não foram realizadas análises estruturais, de instalações ou ambientais; o estado de conservação refere-se à inspeção visual.</li>
+    <li>O valor reflete as condições de mercado na data de referência e pode variar com o tempo.</li>
+    <li>Este parecer não substitui laudo de avaliação elaborado por engenheiro ou arquiteto quando exigido por lei, órgão público ou instituição financeira.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">11</span> Encerramento</h2>
+  <p>O presente Parecer Técnico de Avaliação Mercadológica contém <span class="campo">00</span> páginas, incluindo anexos, todas rubricadas, sendo esta datada e assinada.</p>
+  <p><span class="campo">Cidade/UF</span>, <span class="campo">__ de ______ de 2026</span>.</p>
+  <div class="assinatura">
+    <div class="traco"></div>
+    <b><span class="campo">Nome do corretor</span></b><br>
+    Corretor de Imóveis · CRECI <span class="campo">00000-F</span> · CNAI <span class="campo">00000</span>
+  </div>
+</section>
+
+<section class="quebra">
+  <h2><span class="n">12</span> Anexos</h2>
+  <h3>A. Relatório fotográfico</h3>
+  <div class="fotos">
+    <div class="foto">Fachada</div>
+    <div class="foto">Sala</div>
+    <div class="foto">Cozinha</div>
+    <div class="foto">Dormitório</div>
+  </div>
+  <h3 style="margin-top:5mm">B. Mapa de localização do imóvel e dos comparáveis</h3>
+  <div class="foto" style="height:60mm">Mapa</div>
+  <h3 style="margin-top:5mm">C. Documentos</h3>
+  <ul>
+    <li>Cópia da matrícula atualizada</li>
+    <li>Carnê de IPTU</li>
+    <li>Fichas dos elementos comparáveis</li>
+  </ul>
+  <div class="aviso-modelo"><b>Sobre este modelo:</b> os campos em destaque laranja devem ser preenchidos ou removidos antes da entrega ao cliente. Este documento é uma estrutura de referência; confira os requisitos da NBR 14653 e das resoluções do COFECI/CRECI vigentes na sua região.</div>
+</section>
+
+</body>
+</html>

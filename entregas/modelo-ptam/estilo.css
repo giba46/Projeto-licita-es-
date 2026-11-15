@@ -1,0 +1,83 @@
+
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  :root { --laranja:#F26B1D; --escuro:#14181F; --cinza:#5B6470; --linha:#D9DEE5; --fundo:#F5F7FA; }
+  * { box-sizing: border-box; }
+  body { font-family: "Inter", "DejaVu Sans", sans-serif; color: var(--escuro); font-size: 10.5pt; line-height: 1.5; margin: 0; }
+  h1,h2,h3 { font-family: "Inter Display","Inter",sans-serif; margin: 0; }
+  .campo { color: #A04A12; background: #FFF1E8; padding: 0 3px; border-radius: 2px; font-weight: 500; }
+  .nota { font-size: 8.5pt; color: var(--cinza); }
+
+  /* capa */
+  .capa { height: 257mm; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; }
+  .capa-topo { display:flex; justify-content:space-between; align-items:center; border-bottom: 3px solid var(--laranja); padding-bottom: 10mm; }
+  .logo-box { width: 52mm; height: 22mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; text-align:center; }
+  .capa-tag { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: var(--laranja); font-weight: 700; }
+  .capa-meio h1 { font-size: 30pt; line-height: 1.12; letter-spacing: -.01em; }
+  .capa-meio h1 span { color: var(--laranja); }
+  .capa-meio .sub { font-size: 13pt; color: var(--cinza); margin-top: 6mm; }
+  .capa-dados { background: var(--fundo); border-left: 4px solid var(--laranja); padding: 7mm 8mm; margin-top: 14mm; }
+  .capa-dados table { width:100%; border-collapse: collapse; }
+  .capa-dados td { padding: 1.6mm 0; vertical-align: top; }
+  .capa-dados td:first-child { width: 42mm; color: var(--cinza); font-size: 9.5pt; }
+  .capa-rodape { display:flex; justify-content:space-between; font-size: 9pt; color: var(--cinza); border-top: 1px solid var(--linha); padding-top: 4mm; }
+
+  /* sumário */
+  .sumario { page-break-after: always; }
+  .sumario ol { padding-left: 0; list-style: none; counter-reset: s; margin-top: 8mm; }
+  .sumario li { counter-increment: s; display:flex; padding: 2.6mm 0; border-bottom: 1px dotted var(--linha); }
+  .sumario li::before { content: counter(s, decimal-leading-zero); color: var(--laranja); font-weight: 700; width: 12mm; }
+
+  /* seções */
+  .titulo-pag { font-size: 18pt; margin-bottom: 2mm; }
+  .linha-laranja { width: 18mm; height: 3px; background: var(--laranja); margin-bottom: 6mm; }
+  section { margin-bottom: 7mm; break-inside: avoid-page; }
+  section h2 { font-size: 12.5pt; display:flex; gap: 3mm; align-items: baseline; border-bottom: 1px solid var(--linha); padding-bottom: 1.5mm; margin-bottom: 3mm; }
+  section h2 .n { color: var(--laranja); font-size: 11pt; }
+  section h3 { font-size: 10.5pt; margin: 3mm 0 1.5mm; }
+  p { margin: 0 0 2.4mm; text-align: justify; }
+
+  table.dados { width:100%; border-collapse: collapse; font-size: 9.5pt; margin: 2mm 0 3mm; }
+  table.dados th { background: var(--escuro); color: #fff; text-align: left; font-weight: 600; padding: 2mm 2.4mm; font-size: 8.8pt; }
+  table.dados td { border-bottom: 1px solid var(--linha); padding: 1.9mm 2.4mm; vertical-align: top; }
+  table.dados tr:nth-child(even) td { background: var(--fundo); }
+  table.ficha td:first-child { width: 48mm; color: var(--cinza); }
+  table.num td, table.num th { text-align: right; }
+  table.num td:first-child, table.num th:first-child { text-align: left; }
+
+  .destaque { border: 2px solid var(--laranja); border-radius: 3mm; padding: 6mm 8mm; text-align: center; margin: 4mm 0; break-inside: avoid; }
+  .destaque .rot { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); }
+  .destaque .valor { font-size: 24pt; font-weight: 800; margin: 2mm 0; }
+  .destaque .ext { font-size: 10pt; color: var(--cinza); }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .caixa { background: var(--fundo); padding: 4mm 5mm; border-radius: 2mm; }
+  .caixa b { display:block; font-size: 9pt; color: var(--cinza); font-weight: 500; }
+  .caixa span { font-size: 12pt; font-weight: 700; }
+  ul { margin: 0 0 2.4mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  .fotos { display:grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .foto { height: 52mm; border: 1.5px dashed var(--linha); display:flex; align-items:center; justify-content:center; color: var(--cinza); font-size: 9pt; }
+  .assinatura { margin-top: 22mm; text-align:center; }
+  .assinatura .traco { width: 85mm; border-top: 1px solid var(--escuro); margin: 0 auto 2mm; }
+  .aviso-modelo { border: 1px solid #F3C9AE; background: #FFF8F3; padding: 4mm 5mm; border-radius: 2mm; font-size: 8.8pt; color: #6B3A17; margin-top: 8mm; }
+  .quebra { page-break-before: always; }
+
+  .marca { display:flex; flex-direction:column; line-height:1.05; }
+  .marca .m1 { font-family:"Inter Display",sans-serif; font-weight:800; font-size:20pt; letter-spacing:.06em; }
+  .marca .m2 { font-size:9pt; color: var(--laranja); letter-spacing:.08em; text-transform:uppercase; }
+  .capa-valor { margin-top:8mm; display:flex; justify-content:space-between; align-items:center; background: var(--escuro); color:#fff; padding:6mm 8mm; border-radius:2mm; }
+  .capa-valor span { font-size:9pt; letter-spacing:.12em; text-transform:uppercase; color:#C9CED6; }
+  .capa-valor b { font-size:20pt; }
+  .resumo { margin-top: 12mm; }
+  .titulo-res { font-weight:700; font-size:11pt; margin-bottom:3mm; }
+  .grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .grid3 .caixa span { font-size: 11pt; }
+  .esq { text-align:left !important; }
+  .ok { color:#1E7B46; font-weight:600; } .fora { color:#B3261E; font-weight:600; }
+  table.num td, table.num th { white-space: nowrap; }
+  table.num td.esq { white-space: normal; }
+  .grid2 > table { margin: 0; }
+  .fotos { grid-template-columns: 1fr 1fr 1fr; } .foto { height: 44mm; }
+  .aviso-modelo { break-inside: avoid; }
+  .sumario li { padding: 1.7mm 0; }
+  .sumario ol { margin-top: 5mm; }
+  .resumo { margin-top: 7mm; }
