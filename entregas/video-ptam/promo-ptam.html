@@ -1,133 +1,170 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>Promo PTAM</title>
 <style>
-:root{--lar:#F26B1D;--lar2:#FF8A3D;--esc:#0E1117;--esc2:#171C25;--cin:#8A93A1;--br:#fff}
+/* ===== Identidade das promoções MERCAV PTAM (ajuste aqui cores e logo) ===== */
+:root{
+  --lar:#FFC222;      /* Amarelo Sol – cor da marca escolhida */
+  --lar-a:#FFD24D;    /* tom claro do degradê */
+  --grad:linear-gradient(180deg,#FFD24D 0%,#F5B700 100%);
+  --marrom:#0A1628;   /* texto sobre laranja */
+  --preto:#0B1A30;   /* azul escuro MERCAV (títulos) */    /* títulos e cards */
+  --card:#0A1628;    /* azul escuro MERCAV (cards) */     /* cards escuros */
+  --fundo1:#F9F8F6;   /* fundo claro */
+  --fundo2:#ECEAE6;
+  --texto2:#4A4F57;   /* subtítulo */
+  --linha:#DCDAD4;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1080px;height:1920px;overflow:hidden;background:var(--esc);font-family:"Inter",sans-serif;color:#fff}
-.cena{position:absolute;inset:0;opacity:0}
-h1,.big{font-family:"Inter Display","Inter",sans-serif;font-weight:800;letter-spacing:-.02em}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:"Inter",sans-serif;color:var(--preto);
+  background:radial-gradient(1200px 900px at 75% 35%, #FFFFFF 0%, var(--fundo1) 45%, var(--fundo2) 100%)}
+.big,h1,h2{font-family:"Inter Display","Inter",sans-serif;font-weight:800;letter-spacing:-.025em}
 .lar{color:var(--lar)}
-/* fundo animado */
-#bg{position:absolute;inset:-200px;background:
- radial-gradient(600px 600px at 20% 15%, rgba(242,107,29,.22), transparent 70%),
- radial-gradient(700px 700px at 85% 80%, rgba(242,107,29,.14), transparent 70%);
- animation:bg 20s linear both}
-@keyframes bg{from{transform:translate(0,0) rotate(0)}to{transform:translate(-60px,40px) rotate(8deg)}}
-#grade{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:60px 60px}
-/* barra de progresso topo (fora da zona da UI do Reels) */
-#prog{position:absolute;left:80px;right:80px;top:250px;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;opacity:0;animation:fadeIn .4s 5.4s both, fadeOut .3s 14.2s forwards}
-#prog i{display:block;height:100%;background:var(--lar);transform-origin:left;transform:scaleX(0);animation:progA 8.6s 5.5s linear both}
-@keyframes progA{to{transform:scaleX(1)}}
+.cena{position:absolute;inset:0;opacity:0}
 
-/* ============ CENA 1: gancho 0–3s */
+/* cabeçalho fixo: logo + linha superior, como nas artes */
+#topo{position:absolute;left:0;right:0;top:200px;display:flex;justify-content:center;gap:34px;align-items:center;animation:up .5s .1s both}
+.logo{display:flex;align-items:center;gap:14px}
+.logo img{height:92px;display:block}
+.selo-ptam{background:var(--grad);color:var(--marrom);font-family:"Inter Display",sans-serif;font-weight:900;font-size:40px;letter-spacing:.08em;padding:10px 26px;border-radius:16px;box-shadow:0 10px 22px rgba(245,183,0,.35)}
+.logo .wm{font-family:"Inter Display",sans-serif;font-weight:900;font-size:42px;letter-spacing:.08em}
+.logo .tag{background:var(--lar);color:#fff;font-weight:800;font-size:22px;letter-spacing:.12em;padding:6px 12px;border-radius:8px}
+#topo .sup{font-size:19px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--texto2)}
+
+/* cards escuros com ícone laranja (padrão das artes) */
+.feat{display:flex;align-items:center;gap:24px;background:var(--card);color:#fff;border-radius:22px;padding:20px 26px;font-weight:700;font-size:34px;line-height:1.1;box-shadow:0 14px 30px rgba(0,0,0,.18)}
+.ico{width:70px;height:70px;border-radius:16px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:none}
+.ico svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.btn{background:var(--grad);color:var(--marrom);border-radius:999px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:0 16px 30px rgba(245,183,0,.35)}
+.btn .seta{width:1.25em;height:1.25em;border-radius:50%;background:var(--marrom);color:#FFC222;display:inline-flex;align-items:center;justify-content:center;font-size:.7em}
+
+/* ====== CENA 1 — gancho 0–3s */
 #c1{animation:show 0s 0s both, hide .35s 2.85s forwards}
-#c1 .corr{position:absolute;top:470px;left:80px;font-size:54px;font-weight:600;color:var(--cin);animation:up .5s .15s both}
-#c1 h1{position:absolute;top:560px;left:80px;right:80px;font-size:118px;line-height:1.02}
+#c1 .corr{position:absolute;top:420px;left:80px;font-size:52px;font-weight:600;color:var(--texto2);animation:up .5s .15s both}
+#c1 h1{position:absolute;top:500px;left:80px;right:80px;font-size:120px;line-height:1.02}
 #c1 h1 span{display:inline-block;animation:pop .45s both}
-#c1 .relogio{position:absolute;left:50%;top:1050px;width:300px;height:300px;margin-left:-150px;border:14px solid #2A313D;border-radius:50%;animation:pop .5s 1.4s both}
-#c1 .relogio::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:110px;margin-left:-6px;background:var(--lar);border-radius:6px;transform-origin:50% 100%;transform:translateY(-100%);animation:spin .6s 1.4s linear 3}
-#c1 .relogio::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:75px;margin-left:-6px;background:#fff;border-radius:6px;transform-origin:50% 100%;transform:translateY(-100%) rotate(90deg)}
-#c1 .hrs{position:absolute;top:1400px;width:100%;text-align:center;font-size:44px;color:var(--cin);animation:up .4s 1.9s both}
-#c1 .hrs b{color:#fff}
+#c1 .relogio{position:absolute;left:50%;top:1000px;width:300px;height:300px;margin-left:-150px;border-radius:50%;background:var(--card);box-shadow:0 20px 40px rgba(0,0,0,.2);animation:pop .5s 1.4s both}
+#c1 .relogio::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:105px;margin-left:-6px;background:var(--lar);border-radius:6px;transform-origin:50% 100%;transform:translateY(-100%);animation:spin .6s 1.4s linear 3}
+#c1 .relogio::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:70px;margin-left:-6px;background:#fff;border-radius:6px;transform-origin:50% 100%;transform:translateY(-100%) rotate(90deg)}
+#c1 .hrs{position:absolute;top:1360px;width:100%;text-align:center;font-size:42px;color:var(--texto2);animation:up .4s 1.9s both}
+#c1 .hrs b{color:var(--preto)}
 @keyframes spin{from{transform:translateY(-100%) rotate(0)}to{transform:translateY(-100%) rotate(360deg)}}
 
-/* ============ CENA 2: virada 3–5.5s */
+/* ====== CENA 2 — virada 3–5.5s */
 #c2{animation:show 0s 2.95s both, hide .3s 5.3s forwards}
-#c2 .wipe{position:absolute;inset:0;background:var(--lar);transform-origin:bottom;animation:wipe .45s 2.95s cubic-bezier(.7,0,.3,1) both}
-@keyframes wipe{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-#c2 .t1{position:absolute;top:560px;width:100%;text-align:center;font-size:64px;font-weight:700;color:var(--esc);animation:up .4s 3.3s both}
-#c2 .cinco{position:absolute;top:640px;width:100%;text-align:center;font-size:420px;line-height:1;color:var(--esc);animation:zoom .6s 3.45s cubic-bezier(.2,1.6,.4,1) both}
-#c2 .t2{position:absolute;top:1080px;width:100%;text-align:center;font-size:84px;color:var(--esc);animation:up .4s 3.8s both}
-#c2 .t3{position:absolute;top:1200px;width:100%;text-align:center;font-size:46px;font-weight:600;color:rgba(14,17,23,.75);animation:up .4s 4.2s both}
+#c2 .t0{position:absolute;top:400px;left:80px;font-size:104px;line-height:1.02;animation:up .45s 3.0s both}
+#c2 .t1{position:absolute;top:520px;left:80px;right:80px;font-size:84px;line-height:1.05;animation:up .45s 3.2s both}
+#c2 .cinco{position:absolute;top:760px;left:0;right:0;text-align:center;font-size:520px;line-height:1;color:var(--lar);animation:zoom .6s 3.5s cubic-bezier(.2,1.6,.4,1) both}
+#c2 .t3{position:absolute;top:1340px;width:100%;text-align:center;font-size:42px;color:var(--texto2);animation:up .4s 4.0s both}
 @keyframes zoom{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* ============ CENA 3: 5 etapas 5.5–14.2s */
+/* ====== CENA 3 — 5 etapas no notebook 5.5–14.2s */
 #c3{animation:show 0s 5.4s both, hide .3s 14.2s forwards}
-#c3 .marca{position:absolute;top:300px;left:80px;font-size:40px;font-weight:800;letter-spacing:.08em;animation:up .4s 5.5s both}
-#c3 .marca span{color:var(--lar);margin-left:10px}
-#c3 .titulo{position:absolute;top:360px;left:80px;right:80px;font-size:66px;line-height:1.05;animation:up .4s 5.6s both}
-.palco{position:absolute;top:540px;left:80px;right:80px;height:560px;background:var(--esc2);border:2px solid #252C38;border-radius:36px;overflow:hidden;animation:up .5s 5.7s both}
-.etapa{position:absolute;inset:0;padding:48px;opacity:0}
-.etapa .rot{font-size:30px;color:var(--lar);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.etapa h2{font-family:"Inter Display",sans-serif;font-size:58px;font-weight:800;margin:10px 0 30px}
-.lista{position:absolute;left:80px;right:80px;top:1140px}
-.item{display:flex;align-items:center;gap:26px;height:68px;font-size:36px;color:#5D6675;font-weight:600;animation:up .35s both}
-.item .bola{width:46px;height:46px;border-radius:50%;border:3px solid #39414F;display:flex;align-items:center;justify-content:center;font-size:24px;flex:none}
-/* ativação dos itens */
-.item.on{animation:up .35s both, ativa .3s forwards}
-@keyframes ativa{to{color:#fff}}
-.item.on .bola{animation:ativaB .3s forwards}
-@keyframes ativaB{to{background:var(--lar);border-color:var(--lar);color:#fff}}
+#c3 .tit{position:absolute;top:350px;left:80px;right:80px;font-size:76px;line-height:1.03;animation:up .45s 5.5s both}
+.note{position:absolute;left:60px;right:60px;top:580px;animation:up .55s 5.65s cubic-bezier(.2,1.2,.4,1) both}
+.tela{height:560px;background:#060C16;border-radius:26px 26px 6px 6px;padding:16px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.app{height:100%;background:#F4F6F9;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.app .barra{height:58px;background:#0B1A30;display:flex;align-items:center;gap:12px;padding:0 22px}
+.app .barra .wm{color:#fff;font-weight:900;letter-spacing:.08em;font-size:22px}
+.app .barra .tag{background:var(--grad);color:var(--marrom);font-size:13px;font-weight:800;padding:3px 8px;border-radius:5px;letter-spacing:.1em}
+.app .corpo{flex:1;display:flex}
+.side{width:250px;background:#fff;border-right:1px solid #E3E7ED;padding:22px 18px}
+.side .s{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:600;color:#9AA3AF;height:56px}
+.side .s i{width:30px;height:30px;border-radius:50%;border:2px solid #CBD2DB;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:15px;font-weight:800;flex:none}
+.painel{flex:1;position:relative}
+.etapa{position:absolute;inset:0;padding:26px 30px;opacity:0}
+.etapa .rot{font-size:16px;color:var(--lar);font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.etapa h2{font-size:34px;margin:4px 0 18px}
+.base{height:18px;background:#060C16;border-radius:0 0 30px 30px;margin:0 -40px}
+/* etapa 1 */
+.campo{height:50px;border-radius:10px;background:#fff;border:2px solid #E3E7ED;margin-bottom:14px;position:relative;overflow:hidden;display:flex;align-items:center;padding:0 18px;font-size:19px;color:#5B6470;font-weight:600}
+.campo i{position:absolute;left:0;top:0;bottom:0;background:rgba(255,194,34,.22);transform-origin:left;transform:scaleX(0)}
+.campo b{margin-left:auto;color:#1E9E57;font-size:24px;opacity:0;position:relative}
+/* etapa 2 */
+.mapa{position:absolute;left:30px;right:30px;top:110px;bottom:26px;border-radius:14px;background:
+ linear-gradient(35deg,transparent 46%,#fff 46%,#fff 49%,transparent 49%),
+ linear-gradient(-20deg,transparent 60%,#fff 60%,#fff 62.5%,transparent 62.5%),
+ linear-gradient(100deg,transparent 30%,#fff 30%,#fff 32%,transparent 32%),#DDE3EA}
+.pin{position:absolute;width:30px;height:30px;margin:-30px 0 0 -15px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#0B1A30;opacity:0}
+.pin.alvo{background:var(--lar);width:42px;height:42px;margin:-42px 0 0 -21px}
+/* etapa 3 */
+.barras{position:absolute;left:30px;right:30px;bottom:30px;height:250px;display:flex;align-items:flex-end;gap:16px}
+.barras div{flex:1;background:#C3CAD4;border-radius:8px 8px 3px 3px}
+.selo{position:absolute;right:30px;top:30px;font-size:16px;font-weight:800;border:2px solid var(--lar);color:var(--lar);padding:6px 12px;border-radius:9px}
+/* etapa 4 */
+.contador{font-family:"Inter Display",sans-serif;font-size:96px;font-weight:800;margin-top:26px}
+.contador small{font-size:44px;color:#5B6470;margin-right:10px}
+.sub4{font-size:20px;color:#5B6470;margin-top:12px;font-weight:600}
+/* etapa 5 */
+.doc{position:absolute;right:40px;top:30px;width:230px;height:310px;background:#fff;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.18);padding:20px}
+.doc .lg{width:90px;height:24px;border-radius:5px;background:#0B1A30}
+.doc .l{height:10px;border-radius:5px;background:#E3E7ED;margin-top:12px}
+.doc .fx{height:6px;background:var(--lar);margin:14px 0}
+.doc .v{margin-top:20px;border:2px solid var(--lar);border-radius:8px;padding:8px;font-weight:800;font-size:19px;text-align:center}
+.chk{font-size:24px;font-weight:700;margin-top:16px;opacity:0}
+.chk b{color:#1E9E57;margin-right:10px}
+/* card escuro da etapa atual, abaixo do notebook */
+.cards{position:absolute;left:80px;right:80px;top:1220px;height:130px}
+.cards .feat{position:absolute;inset:0;opacity:0}
+.cards .feat small{display:block;font-size:24px;font-weight:500;color:#B9BEC6;margin-top:6px}
 
-/* etapa 1 formulário */
-.campo{height:58px;border-radius:14px;background:#222936;margin-bottom:18px;position:relative;overflow:hidden;display:flex;align-items:center;padding:0 22px;font-size:26px;color:var(--cin)}
-.campo i{position:absolute;left:0;top:0;bottom:0;background:rgba(242,107,29,.18);transform-origin:left;transform:scaleX(0)}
-.campo b{margin-left:auto;color:#3BD47B;font-size:30px;opacity:0}
-/* etapa 2 mapa */
-.mapa{position:absolute;left:48px;right:48px;top:190px;bottom:48px;border-radius:22px;background:
- linear-gradient(35deg,transparent 46%,#2C3443 46%,#2C3443 49%,transparent 49%),
- linear-gradient(-20deg,transparent 60%,#2C3443 60%,#2C3443 62.5%,transparent 62.5%),
- linear-gradient(100deg,transparent 30%,#2C3443 30%,#2C3443 32%,transparent 32%),#1D2330}
-.pin{position:absolute;width:44px;height:44px;margin:-44px 0 0 -22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#fff;opacity:0}
-.pin.alvo{background:var(--lar);width:60px;height:60px;margin:-60px 0 0 -30px}
-/* etapa 3 barras */
-.barras{position:absolute;left:48px;right:48px;bottom:60px;height:270px;display:flex;align-items:flex-end;gap:22px}
-.barras div{flex:1;background:#3A4252;border-radius:10px 10px 4px 4px}
-.linhaMedia{position:absolute;left:48px;right:48px;bottom:240px;border-top:4px dashed var(--lar);opacity:0}
-.selo{position:absolute;right:48px;top:52px;font-size:24px;font-weight:700;border:3px solid var(--lar);color:var(--lar);padding:8px 16px;border-radius:12px}
-/* etapa 4 contador */
-.contador{font-family:"Inter Display",sans-serif;font-size:118px;font-weight:800;margin-top:40px}
-.contador small{font-size:56px;color:var(--cin);margin-right:12px}
-.sub4{font-size:30px;color:var(--cin);margin-top:18px}
-/* etapa 5 parecer */
-.doc{position:absolute;right:70px;top:120px;width:300px;height:400px;background:#fff;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.4);padding:26px;color:var(--esc)}
-.doc .logo{width:110px;height:32px;border-radius:6px;background:var(--esc)}
-.doc .l{height:12px;border-radius:6px;background:#D9DEE5;margin-top:14px}
-.doc .faixa{height:8px;background:var(--lar);margin:18px 0}
-.doc .v{margin-top:26px;border:3px solid var(--lar);border-radius:10px;padding:12px;font-weight:800;font-size:26px;text-align:center}
-.chk{font-size:32px;margin-top:22px;opacity:0}
-.chk b{color:#3BD47B;margin-right:12px}
-
-/* ============ CENA 4: celular + responsabilidade 14.2–16.8 */
+/* ====== CENA 4 — celular 14.2–16.8 */
 #c4{animation:show 0s 14.2s both, hide .3s 16.8s forwards}
-.cel{position:absolute;left:50%;top:330px;width:400px;height:780px;margin-left:-200px;border-radius:60px;background:#000;border:14px solid #2B323E;overflow:hidden;animation:cel .7s 14.25s cubic-bezier(.2,1.3,.4,1) both}
-@keyframes cel{from{transform:translateY(500px) rotate(-12deg)}to{transform:none}}
-.cel .tela{position:absolute;inset:0;background:#F5F7FA;padding:70px 26px 26px;color:var(--esc)}
-.cel .top{height:44px;width:160px;background:var(--esc);border-radius:8px}
-.cel .card{height:110px;border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.08);margin-top:22px;padding:18px}
-.cel .card i{display:block;height:14px;border-radius:7px;background:#D9DEE5;margin-bottom:12px}
-.cel .card i:first-child{width:60%;background:var(--lar)}
-.cel .btn{margin-top:26px;height:70px;border-radius:18px;background:var(--lar);color:#fff;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center}
-#c4 .t{position:absolute;top:1160px;width:100%;text-align:center;font-size:72px;animation:up .4s 14.5s both}
-#c4 .resp{position:absolute;top:1290px;left:110px;right:110px;text-align:center;font-size:38px;line-height:1.35;color:var(--cin);animation:up .4s 15.2s both}
-#c4 .resp b{color:#fff}
+#c4 .t{position:absolute;top:330px;left:80px;right:80px;font-size:96px;line-height:1.02;animation:up .4s 14.3s both}
+.cel{position:absolute;left:50%;top:560px;width:380px;height:740px;margin-left:-190px;border-radius:56px;background:#060C16;padding:14px;box-shadow:0 30px 60px rgba(0,0,0,.25);animation:cel .7s 14.3s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes cel{from{transform:translateY(600px) rotate(-12deg)}to{transform:none}}
+.cel .scr{height:100%;border-radius:44px;background:#F4F6F9;overflow:hidden}
+.cel .bar{height:110px;background:#0B1A30;display:flex;align-items:flex-end;gap:10px;padding:0 24px 20px}
+.cel .bar .wm{color:#fff;font-weight:900;letter-spacing:.08em;font-size:22px}
+.cel .bar .tag{background:var(--grad);color:var(--marrom);font-size:12px;font-weight:800;padding:3px 7px;border-radius:5px}
+.cel .card{height:100px;border-radius:16px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.06);margin:18px 20px 0;padding:16px}
+.cel .card i{display:block;height:12px;border-radius:6px;background:#E3E7ED;margin-bottom:11px}
+.cel .card i:first-child{width:55%;background:var(--lar)}
+.cel .b2{margin:24px 20px 0;height:64px;font-size:22px}
+#c4 .resp{position:absolute;top:1360px;left:80px;right:80px;animation:up .45s 15.1s both}
+#c4 .resp .feat{font-size:30px}
 
-/* ============ CENA 5: CTA 16.8–20 */
+/* ====== CENA 5 — CTA 16.8–20 (igual à arte da promoção) */
 #c5{animation:show 0s 16.8s both}
-#c5 .wipe{position:absolute;inset:0;background:var(--lar);transform-origin:top;animation:wipe2 .45s 16.8s cubic-bezier(.7,0,.3,1) both}
-@keyframes wipe2{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-#c5 .logo{position:absolute;top:420px;width:100%;text-align:center;font-size:110px;font-weight:900;letter-spacing:.06em;color:var(--esc);animation:zoom .5s 17.1s cubic-bezier(.2,1.5,.4,1) both}
-#c5 .logo span{display:block;font-size:64px;letter-spacing:.32em;color:#fff;margin-top:6px}
-#c5 .sl{position:absolute;top:700px;width:100%;text-align:center;font-size:56px;font-weight:700;color:var(--esc);line-height:1.15;animation:up .4s 17.5s both}
-#c5 .teste{position:absolute;top:930px;left:140px;right:140px;background:var(--esc);border-radius:30px;padding:40px;text-align:center;animation:up .45s 17.9s both}
-#c5 .teste b{display:block;font-size:76px;color:#fff;font-family:"Inter Display",sans-serif}
-#c5 .teste span{font-size:36px;color:var(--lar2);font-weight:600}
-#c5 .cta{position:absolute;top:1250px;left:50%;width:640px;margin-left:-320px;height:120px;border-radius:60px;background:#fff;color:var(--esc);font-size:46px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:18px;animation:up .4s 18.3s both, pulso .8s 18.8s ease-in-out 2}
-@keyframes pulso{50%{transform:scale(1.06)}}
-#c5 .site{position:absolute;top:1410px;width:100%;text-align:center;font-size:34px;font-weight:600;color:rgba(14,17,23,.75);animation:up .4s 18.6s both}
+#c5 .h{position:absolute;top:340px;left:80px;right:80px;animation:up .45s 16.85s both}
+#c5 .h .a{font-size:92px;color:var(--lar);line-height:1}
+#c5 .h .b{font-size:78px;line-height:1.04;margin-top:10px}
+#c5 .h p{font-size:34px;color:var(--texto2);margin-top:22px;font-weight:500;line-height:1.3}
+#c5 .lista{position:absolute;left:80px;top:860px;width:560px;display:flex;flex-direction:column;gap:18px}
+#c5 .lista .feat{animation:right .4s both}
+#c5 .mini{position:absolute;right:40px;top:900px;width:390px;animation:up .6s 17.3s both}
+#c5 .mini .tela{height:300px;border-radius:18px 18px 4px 4px;padding:10px}
+#c5 .mini .base{height:12px;margin:0 -24px}
+#c5 .cta{position:absolute;left:80px;right:80px;top:1390px;height:120px;font-size:46px;animation:up .4s 18.4s both, pulso .8s 18.9s ease-in-out 2}
+#c5 .rod{position:absolute;top:1530px;width:100%;text-align:center;font-size:30px;color:var(--texto2);font-weight:600;animation:up .4s 18.7s both}
+#c5 .rod b{color:var(--lar)}
+@keyframes pulso{50%{transform:scale(1.04)}}
+@keyframes right{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
 
-/* utilitários */
 @keyframes show{to{opacity:1}} @keyframes hide{to{opacity:0}}
-@keyframes fadeIn{to{opacity:1}} @keyframes fadeOut{to{opacity:0}}
 @keyframes up{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
-@keyframes inOut{0%{opacity:0;transform:translateX(80px)}12%{opacity:1;transform:none}88%{opacity:1;transform:none}100%{opacity:0;transform:translateX(-80px)}}
+@keyframes inOut{0%{opacity:0;transform:translateX(60px)}12%{opacity:1;transform:none}88%{opacity:1;transform:none}100%{opacity:0;transform:translateX(-60px)}}
 @keyframes grow{to{transform:scaleX(1)}} @keyframes vis{to{opacity:1}}
-@keyframes drop{from{opacity:0;transform:translateY(-120px) rotate(-45deg)}to{opacity:1;transform:rotate(-45deg)}}
+@keyframes drop{from{opacity:0;transform:translateY(-90px) rotate(-45deg)}to{opacity:1;transform:rotate(-45deg)}}
 </style></head>
 <body>
-<div id="bg"></div><div id="grade"></div>
-<div id="prog"><i></i></div>
+<!-- ícones -->
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-lista" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+ <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h2M12 18h4"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+ <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+ <symbol id="i-barras" viewBox="0 0 24 24"><path d="M5 20V10M10 20V5M15 20v-8M20 20v-5M3 20h18"/></symbol>
+ <symbol id="i-cel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></symbol>
+ <symbol id="i-assina" viewBox="0 0 24 24"><path d="M4 18c3-6 5-9 7-9 1.5 0 0 6 2 6 1.2 0 2-2 3-2s1 2 4 2"/><path d="M4 21h16"/></symbol>
+</defs></svg>
+
+<div id="topo">
+  <!-- logo oficial recortado das artes da campanha -->
+  <div class="logo"><img src="marca/logo-mercav-azul.png" alt="MERCAV"></div>
+  <div class="selo-ptam">PTAM</div>
+</div>
 
 <section class="cena" id="c1">
   <div class="corr">Corretor,</div>
@@ -137,107 +174,131 @@ h1,.big{font-family:"Inter Display","Inter",sans-serif;font-weight:800;letter-sp
 </section>
 
 <section class="cena" id="c2">
-  <div class="wipe"></div>
-  <div class="t1">Com o Mercav PTAM são só</div>
+  <div class="t0 big lar">PTAM do corretor.</div>
+  <div class="t1 big">Do cadastro à emissão em</div>
   <div class="cinco big">5</div>
-  <div class="t2 big">etapas.</div>
-  <div class="t3">Do cadastro ao parecer pronto.</div>
+  <div class="t3">etapas guiadas · método comparativo · NBR 14653-2</div>
 </section>
 
 <section class="cena" id="c3">
-  <div class="marca">MERCAV<span>PTAM</span></div>
-  <div class="titulo big">Veja como funciona</div>
-  <div class="palco">
-    <div class="etapa" id="e1" style="animation:inOut 1.75s 5.75s both">
-      <div class="rot">Etapa 1</div><h2>Cadastro do imóvel</h2>
-      <div class="campo"><i style="animation:grow .35s 6.15s both"></i>Endereço e matrícula<b style="animation:vis .2s 6.45s both">✓</b></div>
-      <div class="campo"><i style="animation:grow .35s 6.45s both"></i>Área, dormitórios, vagas<b style="animation:vis .2s 6.75s both">✓</b></div>
-      <div class="campo"><i style="animation:grow .35s 6.75s both"></i>Padrão e conservação<b style="animation:vis .2s 7.05s both">✓</b></div>
-    </div>
-    <div class="etapa" id="e2" style="animation:inOut 1.75s 7.45s both">
-      <div class="rot">Etapa 2</div><h2>Imóveis comparáveis</h2>
-      <div class="mapa">
-        <div class="pin alvo" style="left:48%;top:55%;animation:drop .35s 7.75s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:20%;top:35%;animation:drop .3s 7.95s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:72%;top:28%;animation:drop .3s 8.05s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:30%;top:78%;animation:drop .3s 8.15s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:82%;top:70%;animation:drop .3s 8.25s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:60%;top:85%;animation:drop .3s 8.35s cubic-bezier(.3,1.6,.5,1) both"></div>
-        <div class="pin" style="left:12%;top:62%;animation:drop .3s 8.45s cubic-bezier(.3,1.6,.5,1) both"></div>
+  <div class="tit big">Cinco etapas<br><span class="lar">guiadas.</span></div>
+  <div class="note">
+    <div class="tela"><div class="app">
+      <div class="barra"><span class="wm">MERCAV</span><span class="tag">PTAM</span></div>
+      <div class="corpo">
+        <div class="side">
+          <div class="s"><i>1</i>Cadastro</div><div class="s"><i>2</i>Comparáveis</div>
+          <div class="s"><i>3</i>Fatores</div><div class="s"><i>4</i>Cálculo</div><div class="s"><i>5</i>Emissão</div>
+        </div>
+        <div class="painel">
+          <div class="etapa" style="animation:inOut 1.75s 5.75s both">
+            <div class="rot">Etapa 1</div><h2>Dados do imóvel</h2>
+            <div class="campo"><i style="animation:grow .35s 6.15s both"></i>Endereço e matrícula<b style="animation:vis .2s 6.45s both">✓</b></div>
+            <div class="campo"><i style="animation:grow .35s 6.45s both"></i>Área, dormitórios, vagas<b style="animation:vis .2s 6.75s both">✓</b></div>
+            <div class="campo"><i style="animation:grow .35s 6.75s both"></i>Padrão e conservação<b style="animation:vis .2s 7.05s both">✓</b></div>
+          </div>
+          <div class="etapa" style="animation:inOut 1.75s 7.45s both">
+            <div class="rot">Etapa 2</div><h2>Comparáveis no mapa</h2>
+            <div class="mapa">
+              <div class="pin alvo" style="left:48%;top:55%;animation:drop .35s 7.75s cubic-bezier(.3,1.6,.5,1) both"></div>
+              <div class="pin" style="left:20%;top:35%;animation:drop .3s 7.95s cubic-bezier(.3,1.6,.5,1) both"></div>
+              <div class="pin" style="left:72%;top:28%;animation:drop .3s 8.05s cubic-bezier(.3,1.6,.5,1) both"></div>
+              <div class="pin" style="left:30%;top:80%;animation:drop .3s 8.15s cubic-bezier(.3,1.6,.5,1) both"></div>
+              <div class="pin" style="left:82%;top:70%;animation:drop .3s 8.25s cubic-bezier(.3,1.6,.5,1) both"></div>
+              <div class="pin" style="left:60%;top:88%;animation:drop .3s 8.35s cubic-bezier(.3,1.6,.5,1) both"></div>
+            </div>
+          </div>
+          <div class="etapa" style="animation:inOut 1.75s 9.15s both">
+            <div class="rot">Etapa 3</div><h2>Tratamento por fatores</h2>
+            <div class="selo">NBR 14653-2</div>
+            <div class="barras" id="barras"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>
+          <div class="etapa" style="animation:inOut 1.75s 10.85s both">
+            <div class="rot">Etapa 4</div><h2>Cálculo automático</h2>
+            <div class="contador"><small>R$</small><span id="num">0</span></div>
+            <div class="sub4">média saneada · campo de arbítrio · graus de fundamentação</div>
+          </div>
+          <div class="etapa" style="animation:inOut 1.85s 12.55s both">
+            <div class="rot">Etapa 5</div><h2>Parecer pronto</h2>
+            <div class="chk" style="animation:vis .2s 12.95s both"><b>✓</b>Capa e sumário</div>
+            <div class="chk" style="animation:vis .2s 13.2s both"><b>✓</b>Sua logomarca</div>
+            <div class="chk" style="animation:vis .2s 13.45s both"><b>✓</b>Parecer numerado</div>
+            <div class="doc" style="animation:up .45s 12.8s cubic-bezier(.2,1.4,.4,1) both">
+              <div class="lg"></div><div class="fx"></div><div class="l" style="width:90%"></div><div class="l" style="width:70%"></div><div class="l"></div>
+              <div class="v">R$ 418.000</div><div class="l" style="width:60%"></div><div class="l" style="width:85%"></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="etapa" id="e3" style="animation:inOut 1.75s 9.15s both">
-      <div class="rot">Etapa 3</div><h2>Tratamento por fatores</h2>
-      <div class="selo">NBR 14653-2</div>
-      <div class="barras" id="barras"><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      <div class="linhaMedia" style="animation:vis .25s 10.05s both"></div>
-    </div>
-    <div class="etapa" id="e4" style="animation:inOut 1.75s 10.85s both">
-      <div class="rot">Etapa 4</div><h2>Cálculo automático</h2>
-      <div class="contador"><small>R$</small><span id="num">0</span></div>
-      <div class="sub4">média saneada · campo de arbítrio · graus de fundamentação e precisão</div>
-    </div>
-    <div class="etapa" id="e5" style="animation:inOut 1.85s 12.55s both">
-      <div class="rot">Etapa 5</div><h2>Parecer pronto</h2>
-      <div class="chk" style="animation:vis .2s 12.95s both"><b>✓</b>Capa e sumário</div>
-      <div class="chk" style="animation:vis .2s 13.2s both"><b>✓</b>Sua logomarca</div>
-      <div class="chk" style="animation:vis .2s 13.45s both"><b>✓</b>Parecer numerado</div>
-      <div class="doc" style="animation:up .45s 12.8s cubic-bezier(.2,1.4,.4,1) both">
-        <div class="logo"></div><div class="faixa"></div>
-        <div class="l" style="width:90%"></div><div class="l" style="width:70%"></div><div class="l"></div><div class="l" style="width:80%"></div>
-        <div class="v">R$ 418.000</div>
-        <div class="l" style="width:60%"></div><div class="l" style="width:85%"></div>
-      </div>
-    </div>
+    </div></div>
+    <div class="base"></div>
   </div>
-  <div class="lista">
-    <div class="item" style="animation-delay:5.8s"><span class="bola">1</span>Cadastro do imóvel</div>
-    <div class="item" style="animation-delay:5.9s"><span class="bola">2</span>Comparáveis</div>
-    <div class="item" style="animation-delay:6.0s"><span class="bola">3</span>Tratamento por fatores</div>
-    <div class="item" style="animation-delay:6.1s"><span class="bola">4</span>Cálculo automático</div>
-    <div class="item" style="animation-delay:6.2s"><span class="bola">5</span>Emissão do parecer</div>
+  <div class="cards">
+    <div class="feat" style="animation:inOut 1.75s 5.75s both"><span class="ico"><svg><use href="#i-lista"/></svg></span><div>Cadastro guiado<small>Tudo o que o parecer precisa, passo a passo</small></div></div>
+    <div class="feat" style="animation:inOut 1.75s 7.45s both"><span class="ico"><svg><use href="#i-pin"/></svg></span><div>Comparáveis no mapa<small>Amostra de mercado organizada</small></div></div>
+    <div class="feat" style="animation:inOut 1.75s 9.15s both"><span class="ico"><svg><use href="#i-barras"/></svg></span><div>Homogeneização<small>Oferta, localização, área, padrão e conservação</small></div></div>
+    <div class="feat" style="animation:inOut 1.75s 10.85s both"><span class="ico"><svg><use href="#i-calc"/></svg></span><div>Cálculo automático<small>Sem planilha, sem erro de fórmula</small></div></div>
+    <div class="feat" style="animation:inOut 1.85s 12.55s both"><span class="ico"><svg><use href="#i-doc"/></svg></span><div>Parecer numerado<small>Com capa, sumário e a sua logomarca</small></div></div>
   </div>
 </section>
 
 <section class="cena" id="c4">
-  <div class="cel"><div class="tela">
-    <div class="top"></div>
+  <div class="t big">Também pelo <span class="lar">celular.</span></div>
+  <div class="cel"><div class="scr">
+    <div class="bar"><span class="wm">MERCAV</span><span class="tag">PTAM</span></div>
     <div class="card"><i></i><i></i><i style="width:70%"></i></div>
     <div class="card"><i></i><i></i><i style="width:50%"></i></div>
     <div class="card"><i></i><i style="width:80%"></i></div>
-    <div class="btn">Emitir parecer</div>
+    <div class="btn b2">Emitir parecer</div>
   </div></div>
-  <div class="t big">Até pelo <span class="lar">celular.</span></div>
-  <div class="resp">O sistema organiza e calcula.<br><b>A conferência e a assinatura continuam com você.</b></div>
+  <div class="resp"><div class="feat"><span class="ico"><svg><use href="#i-assina"/></svg></span><div>O sistema organiza e calcula.<br><span style="color:#FFC222">A conferência e a assinatura são suas.</span></div></div></div>
 </section>
 
 <section class="cena" id="c5">
-  <div class="wipe"></div>
-  <div class="logo">MERCAV<span>PTAM</span></div>
-  <div class="sl">O parecer do corretor,<br>do cadastro à emissão.</div>
-  <div class="teste"><b>15 dias grátis</b><span>sem cartão de crédito</span></div>
-  <div class="cta">Toque em Saiba mais →</div>
-  <div class="site">mercav.tecmapsc.com</div>
+  <div class="h">
+    <div class="a big">PTAM do corretor.</div>
+    <div class="b big">Do cadastro à emissão em cinco etapas.</div>
+    <p>Avalie imóveis pelo método comparativo e emita o parecer com o seu CRECI.</p>
+  </div>
+  <div class="lista">
+    <div class="feat" style="animation-delay:17.2s"><span class="ico"><svg><use href="#i-lista"/></svg></span>Cinco etapas guiadas</div>
+    <div class="feat" style="animation-delay:17.35s"><span class="ico"><svg><use href="#i-calc"/></svg></span>Cálculo automático</div>
+    <div class="feat" style="animation-delay:17.5s"><span class="ico"><svg><use href="#i-doc"/></svg></span>Parecer numerado</div>
+    <div class="feat" style="animation-delay:17.65s"><span class="ico"><svg><use href="#i-escudo"/></svg></span>Incluído no seu plano</div>
+  </div>
+  <div class="mini"><div class="tela"><div class="app">
+    <div class="barra" style="height:40px"><span class="wm" style="font-size:16px">MERCAV</span><span class="tag" style="font-size:10px">PTAM</span></div>
+    <div class="corpo"><div class="side" style="width:110px;padding:12px 8px">
+      <div class="s" style="height:34px;font-size:11px"><i style="width:20px;height:20px;font-size:10px;background:var(--lar);border-color:var(--lar);color:#fff">✓</i>Cadastro</div>
+      <div class="s" style="height:34px;font-size:11px"><i style="width:20px;height:20px;font-size:10px;background:var(--lar);border-color:var(--lar);color:#fff">✓</i>Amostra</div>
+      <div class="s" style="height:34px;font-size:11px"><i style="width:20px;height:20px;font-size:10px">3</i>Fatores</div>
+    </div><div style="flex:1;padding:14px">
+      <div class="campo" style="height:30px;font-size:11px;margin-bottom:8px">Endereço</div>
+      <div class="campo" style="height:30px;font-size:11px;margin-bottom:8px">Área privativa</div>
+      <div class="campo" style="height:30px;font-size:11px;margin-bottom:8px">Padrão</div>
+    </div></div>
+  </div></div><div class="base"></div></div>
+  <div class="btn cta">Conheça o Mercav PTAM <span class="seta">➜</span></div>
+  <div class="rod">Teste <b>15 dias grátis</b>, sem cartão · mercav.tecmapsc.com</div>
 </section>
 
 <script>
-// ativação dos itens da lista conforme a etapa
 const ativ=[5.75,7.45,9.15,10.85,12.55];
-const itens=[...document.querySelectorAll('.item')];
-// barras: alturas variadas que convergem para a média
-const alt0=[90,230,150,260,120,200], alvo=[178,182,176,184,179,181];
+const passos=[...document.querySelectorAll('#c3 .side .s')];
+const alt0=[70,210,130,240,100,180], alvo=[168,172,166,174,169,171];
 const barras=[...document.querySelectorAll('#barras div')];
 const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
 window.seek=function(t){
   document.getAnimations().forEach(a=>{a.pause();a.currentTime=t*1000;});
-  itens.forEach((el,i)=>{
-    const on=t>=ativ[i];
-    el.style.color=on?'#fff':'';
-    const b=el.querySelector('.bola');
-    b.style.background=on?'var(--lar)':''; b.style.borderColor=on?'var(--lar)':''; b.style.color=on?'#fff':'';
+  passos.forEach((el,i)=>{
+    const feito=t>=ativ[i]+1.6 && i<4, atual=t>=ativ[i] && !feito;
+    const b=el.querySelector('i');
+    el.style.color=atual?'#16181C':feito?'#5B6470':'';
+    b.textContent=feito?'✓':String(i+1);
+    b.style.background=(atual||feito)?'var(--lar)':''; b.style.borderColor=(atual||feito)?'var(--lar)':''; b.style.color=(atual||feito)?'#fff':'';
   });
   const k=ease((t-9.5)/0.6);
-  barras.forEach((b,i)=>{b.style.height=(alt0[i]+(alvo[i]-alt0[i])*k)+'px'; b.style.background=k>0.98?'var(--lar)':'#3A4252';});
+  barras.forEach((b,i)=>{b.style.height=(alt0[i]+(alvo[i]-alt0[i])*k)+'px'; b.style.background=k>0.98?'var(--lar)':'#C3CAD4';});
   const c=ease((t-11.15)/0.9);
   document.getElementById('num').textContent=Math.round(418000*c).toLocaleString('pt-BR');
 };
