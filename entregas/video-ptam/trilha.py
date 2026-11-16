@@ -1,11 +1,16 @@
-"""Trilha original (sem direitos de terceiros) para o Reels do PTAM.
+"""Uso: python3 trilha.py [duração] [viradas separadas por vírgula]
+
+Trilha original (sem direitos de terceiros) para o Reels do PTAM.
 110 BPM, progressão C – G – Am – F, pad + arpejo + baixo + percussão leve.
 Gera trilha-ptam.wav com a duração do vídeo.
 """
+import sys
 import wave
 import numpy as np
 
-SR, DUR, BPM = 44100, 20.0, 110
+SR, BPM = 44100, 110
+DUR = float(sys.argv[1]) if len(sys.argv) > 1 else 20.0
+WHOOSH = [float(x) for x in sys.argv[2].split(",")] if len(sys.argv) > 2 else [2.95, 5.4, 14.2, 16.8]
 beat = 60 / BPM
 n = int(SR * DUR)
 t = np.arange(n) / SR
@@ -79,7 +84,7 @@ for k in range(nbeats):
     add(tb + beat / 2, 0.035 * hat)
 
 # "whoosh" nas viradas de cena
-for tc in (2.95, 5.4, 14.2, 16.8):
+for tc in WHOOSH:
     Lw = int(0.5 * SR); w = rng.standard_normal(Lw) * np.sin(np.linspace(0, np.pi, Lw)) ** 2
     add(tc - 0.35, 0.05 * lowpass(w, 0.08) * 6)
 
